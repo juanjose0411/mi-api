@@ -1,8 +1,17 @@
 from fastapi import FastAPI
 import google.generativeai as genai
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Configura tu clave
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
