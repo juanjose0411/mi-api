@@ -5,7 +5,7 @@ import os
 app = FastAPI()
 
 # Configura tu clave
-genai.configure(api_key="AIzaSyAl9WkBwu_yLlLqcX3obT_M9mVL9mRGLPo")
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # ESTO NOS DIRÁ EN EL CMD QUÉ MODELOS TIENES ACTIVOS
 print("--- MODELOS DISPONIBLES EN TU CUENTA ---")
