@@ -24,12 +24,22 @@ for m in genai.list_models():
 print("---------------------------------------")
 
 # Intentaremos con el nombre más básico y universal
-model = genai.GenerativeModel('gemini-2.5-flash')
+model = genai.GenerativeModel('gemini-2.0-flash')
 
-@app.get("/preguntar")
-def preguntar_a_gemini(mensaje: str):
+@app.post("/preguntar")
+async def preguntar_a_gemini(mensaje: str = Form(...), file: UploadFile = File(None)):
     try:
-        response = model.generate_content(mensaje)
+        content = [mensaje]
+        
+        # Si el usuario subió una foto, la procesamos
+        if file:
+            image_data = await file.read()
+            content.append({
+                "mime_type": file.content_type,
+                "data": image_data
+            })
+        
+        response = model.generate_content(content)
         return {"respuesta": response.text}
     except Exception as e:
         return {"error": str(e)}
