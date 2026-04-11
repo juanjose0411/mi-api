@@ -24,7 +24,7 @@ for m in genai.list_models():
 print("---------------------------------------")
 
 # Intentaremos con el nombre más básico y universal
-model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
 @app.post("/preguntar")
 async def preguntar_a_gemini(mensaje: str = Form(...), file: UploadFile = File(None)):
