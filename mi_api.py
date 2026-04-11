@@ -34,10 +34,7 @@ async def preguntar_a_gemini(mensaje: str = Form(...), file: UploadFile = File(N
         # Si el usuario subió una foto, la procesamos
         if file:
             image_data = await file.read()
-            content.append({
-                "mime_type": file.content_type,
-                "data": image_data
-            })
+            content.append({"mime_type": file.content_type, "data": image_data})
         
         response = model.generate_content(content)
         return {"respuesta": response.text}
