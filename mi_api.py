@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File, Form
 import google.generativeai as genai
 import os
 from fastapi.middleware.cors import CORSMiddleware
